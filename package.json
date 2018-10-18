@@ -1,0 +1,19 @@
+{
+  "name": "my-cv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "xelatex -output-directory=dist main.tex"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/posquit0/Awesome-CV.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/posquit0/Awesome-CV/issues"
+  },
+  "homepage": "https://github.com/posquit0/Awesome-CV#readme"
+}
