@@ -4,16 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "xelatex -output-directory=dist main.tex"
+    "start": "xelatex -output-directory=dist main.tex && opn dist/main.pdf"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/posquit0/Awesome-CV.git"
+    "url": "git+https://github.com/mucsi96/cv.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/posquit0/Awesome-CV/issues"
+    "url": "https://github.com/mucsi96/cv/issues"
   },
-  "homepage": "https://github.com/posquit0/Awesome-CV#readme"
+  "homepage": "https://github.com/mucsi96/cv#readme",
+  "dependencies": {
+    "opn-cli": "^3.1.0"
+  }
 }
