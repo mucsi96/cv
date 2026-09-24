@@ -8,22 +8,46 @@ nameplate, monochrome ruled headings, and aligned skills and entry details.
 
 Install **Typst 0.15.1**, the version pinned in CI, from the
 [official releases](https://github.com/typst/typst/releases/tag/v0.15.1).
-Run these commands from the repository root:
+Install **Fontist 3.0.10** with Ruby 3.2 or newer:
 
 ```sh
+gem install fontist --version 3.0.10
+```
+
+Fetch the fonts declared in `fonts.yml`, then compile from the repository root:
+
+```sh
+fontist manifest install fonts.yml --preferred-family
 mkdir -p dist
-typst compile --font-path fonts --ignore-system-fonts --pdf-standard ua-1 main.typ dist/main.pdf
+typst compile --font-path "$HOME/.fontist/fonts" --ignore-system-fonts --pdf-standard ua-1 main.typ dist/main.pdf
 ```
 
 Open `dist/main.pdf` in your PDF viewer. For automatic rebuilds while editing:
 
 ```sh
-typst watch --font-path fonts --ignore-system-fonts --pdf-standard ua-1 main.typ dist/main.pdf
+typst watch --font-path "$HOME/.fontist/fonts" --ignore-system-fonts --pdf-standard ua-1 main.typ dist/main.pdf
 ```
 
-The build uses the bundled Source Sans 3 and Roboto fonts, ignoring
-system fonts to keep local and CI rendering consistent. It needs no external
-Typst packages. PDF/UA-1 export checks document structure and image descriptions;
+## Font dependencies
+
+[`fonts.yml`](fonts.yml) is a standard Fontist manifest listing the Source Sans 3
+and Roboto styles used by the template. Fontist downloads them into its own
+font directory (`~/.fontist/fonts`), outside the repository. Re-running the
+install command reuses installed fonts. No font binaries are committed.
+
+Typst selects fonts by family name; it does not download fonts named in
+`set text(font: ...)`. Its documented `--font-path` option points it at the
+Fontist directory. `--preferred-family` lets the manifest use a single family
+name with styles such as Light and Thin. `--ignore-system-fonts` avoids picking
+different fonts installed on the operating system.
+
+CI installs the same pinned Fontist version and manifest, and caches the fonts
+using `fontist/setup-fontist`. The manifest specifies families and styles, not
+exact font-file versions; after updating font dependencies, review the PDF for
+layout changes.
+
+The template needs no external Typst packages.
+PDF/UA-1 export checks document structure and image descriptions;
 the PDF includes selectable text, links, section bookmarks, and document metadata.
 
 The footer shows the build date. CI sets `SOURCE_DATE_EPOCH` to the commit
@@ -36,11 +60,8 @@ timestamp for reproducible builds. To use the same timestamp locally, run
 - `template.typ`: page layout, typography, header, footer, and reusable `entry` function.
 - `summary.typ`, `education.typ`, `skills.typ`, `experience.typ`,
   `open-source.typ`, `volunteering.typ`: CV content.
-- `profile.jpg` and `fonts/`: photo and bundled typefaces.
-
-Source Sans 3 is bundled from
-[Adobe's source-sans repository](https://github.com/adobe-fonts/source-sans/tree/87b37a2daaed80fcb8e8ccb0085c4d72ddade12e/OTF)
-under the SIL Open Font License (see `fonts/SourceSans3-LICENSE.md`).
+- `profile.jpg`: profile photo.
+- `fonts.yml`: font families and styles to install with Fontist.
 
 Use native headings, term lists, and bullet lists in section files. For an
 additional position or activity, copy an `entry` call and edit its organization,
@@ -73,4 +94,9 @@ The template follows the official Typst guidance:
 - [Grid reference](https://typst.app/docs/reference/layout/grid/):
   use grids for visual layout rather than misusing data tables.
 - [Setup Typst action](https://github.com/typst-community/setup-typst):
-  pin the compiler version used by GitHub Actions.
+  pin the compiler version and follow its Fontist integration example.
+- [Typst font discovery](https://typst.app/docs/reference/text/text/#parameters-font):
+  supply downloaded fonts through `--font-path`.
+- [Fontist manifests](https://github.com/fontist/fontist/blob/v3.0.10/docs/guide/manifests.md)
+  and [Setup Fontist](https://github.com/fontist/setup-fontist): declare font
+  requirements in YAML and install/cache them in CI.

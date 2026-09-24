@@ -1,0 +1,10 @@
+# Install with: fontist manifest install fonts.yml --preferred-family
+Source Sans 3:
+  - Light
+  - Light Italic
+  - Regular
+  - Bold
+Roboto:
+  - Thin
+  - Regular
+  - Bold

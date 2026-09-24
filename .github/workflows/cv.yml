@@ -23,11 +23,20 @@ jobs:
         with:
           typst-version: '0.15.1'
 
+      - name: Set up Fontist
+        uses: fontist/setup-fontist@v2
+        with:
+          fontist-version: '3.0.10'
+          cache-dependency-path: fonts.yml
+
+      - name: Install font dependencies
+        run: fontist manifest install fonts.yml --preferred-family --accept-all-licenses --hide-licenses
+
       - name: Compile CV with Typst
         run: |
           mkdir -p dist
           export SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)"
-          typst compile --font-path fonts --ignore-system-fonts --pdf-standard ua-1 main.typ dist/main.pdf
+          typst compile --font-path "$HOME/.fontist/fonts" --ignore-system-fonts --pdf-standard ua-1 main.typ dist/main.pdf
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
