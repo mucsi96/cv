@@ -1,14 +1,19 @@
 #import "template.typ": resume
 
 #show: resume.with(
-  name: "Igor Bari",
+  first-name: "Igor",
+  last-name: "Bari",
   position: "Senior Frontend Developer",
   photo: "profile.jpg",
   contacts: (
-    link("tel:+41798215370")[+41 79 821 53 70],
-    link("mailto:mucsi96@gmail.com")[mucsi96\@gmail.com],
-    link("https://github.com/mucsi96")[GitHub: mucsi96],
-    link("https://www.linkedin.com/in/mucsi")[LinkedIn: mucsi],
+    (
+      link("tel:+41798215370")[Phone: +41 79 821 53 70],
+      link("mailto:mucsi96@gmail.com")[Email: mucsi96\@gmail.com],
+    ),
+    (
+      link("https://github.com/mucsi96")[GitHub: mucsi96],
+      link("https://www.linkedin.com/in/mucsi")[LinkedIn: mucsi],
+    ),
   ),
 )
 

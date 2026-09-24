@@ -1,6 +1,8 @@
 # Igor Bari — CV
 
-A modular [Typst](https://typst.app/) CV with a small, self-contained template.
+A modular [Typst](https://typst.app/) CV with a self-contained template inspired
+by the original Awesome CV design: Source Sans body text, a thin/bold Roboto
+nameplate, monochrome ruled headings, and aligned skills and entry details.
 
 ## Build locally
 
@@ -19,7 +21,7 @@ Open `dist/main.pdf` in your PDF viewer. For automatic rebuilds while editing:
 typst watch --font-path fonts --ignore-system-fonts --pdf-standard ua-1 main.typ dist/main.pdf
 ```
 
-The build uses the bundled Roboto fonts and Typst's built-in fonts, ignoring
+The build uses the bundled Source Sans 3 and Roboto fonts, ignoring
 system fonts to keep local and CI rendering consistent. It needs no external
 Typst packages. PDF/UA-1 export checks document structure and image descriptions;
 the PDF includes selectable text, links, section bookmarks, and document metadata.
@@ -35,6 +37,10 @@ timestamp for reproducible builds. To use the same timestamp locally, run
 - `summary.typ`, `education.typ`, `skills.typ`, `experience.typ`,
   `open-source.typ`, `volunteering.typ`: CV content.
 - `profile.jpg` and `fonts/`: photo and bundled typefaces.
+
+Source Sans 3 is bundled from
+[Adobe's source-sans repository](https://github.com/adobe-fonts/source-sans/tree/87b37a2daaed80fcb8e8ccb0085c4d72ddade12e/OTF)
+under the SIL Open Font License (see `fonts/SourceSans3-LICENSE.md`).
 
 Use native headings, term lists, and bullet lists in section files. For an
 additional position or activity, copy an `entry` call and edit its organization,
