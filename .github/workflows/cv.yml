@@ -30,7 +30,7 @@ jobs:
           cache-dependency-path: fonts.yml
 
       - name: Install font dependencies
-        run: fontist manifest install fonts.yml --preferred-family --accept-all-licenses --hide-licenses
+        run: fontist manifest install fonts.yml --accept-all-licenses --hide-licenses
 
       - name: Compile CV with Typst
         run: |

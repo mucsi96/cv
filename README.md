@@ -12,12 +12,13 @@ Install **Fontist 3.0.10** with Ruby 3.2 or newer:
 
 ```sh
 gem install fontist --version 3.0.10
+fontist update
 ```
 
 Fetch the fonts declared in `fonts.yml`, then compile from the repository root:
 
 ```sh
-fontist manifest install fonts.yml --preferred-family
+fontist manifest install fonts.yml
 mkdir -p dist
 typst compile --font-path "$HOME/.fontist/fonts" --ignore-system-fonts --pdf-standard ua-1 main.typ dist/main.pdf
 ```
@@ -37,8 +38,9 @@ install command reuses installed fonts. No font binaries are committed.
 
 Typst selects fonts by family name; it does not download fonts named in
 `set text(font: ...)`. Its documented `--font-path` option points it at the
-Fontist directory. `--preferred-family` lets the manifest use a single family
-name with styles such as Light and Thin. `--ignore-system-fonts` avoids picking
+Fontist directory. Fontist catalogs `Source Sans 3 Light` and `Roboto Thin` as
+separate families, so the manifest lists them explicitly. Typst unifies these
+under the base family names and selects them by weight. `--ignore-system-fonts` avoids picking
 different fonts installed on the operating system.
 
 CI installs the same pinned Fontist version and manifest, and caches the fonts

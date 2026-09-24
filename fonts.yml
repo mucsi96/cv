@@ -1,10 +1,13 @@
-# Install with: fontist manifest install fonts.yml --preferred-family
+# Install with: fontist manifest install fonts.yml
+# Fontist catalogs Light and Thin as separate families; Typst unifies them.
 Source Sans 3:
-  - Light
-  - Light Italic
   - Regular
   - Bold
+Source Sans 3 Light:
+  - Regular
+  - Italic
 Roboto:
-  - Thin
   - Regular
   - Bold
+Roboto Thin:
+  - Regular
