@@ -1,0 +1,4 @@
+= Summary
+
+I am very passionate about new technologies and creating high quality software solutions.
+I love solving complex technical problems and work with other smart engineers, collaborate and create great software products together.

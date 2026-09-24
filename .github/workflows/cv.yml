@@ -18,17 +18,22 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Compile CV with XeLaTeX
-        uses: xu-cheng/latex-action@v4
+      - name: Set up Typst
+        uses: typst-community/setup-typst@v5
         with:
-          root_file: main.tex
-          latexmk_use_xelatex: true
+          typst-version: '0.15.1'
+
+      - name: Compile CV with Typst
+        run: |
+          mkdir -p dist
+          export SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)"
+          typst compile --font-path fonts --ignore-system-fonts --pdf-standard ua-1 main.typ dist/main.pdf
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: cv-pdf
-          path: main.pdf
+          path: dist/main.pdf
           if-no-files-found: error
 
   release:
